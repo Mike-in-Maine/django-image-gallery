@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from .models import *
+from .forms import SearchForm
 
 # Create your views here.
 
 def home(request):
     categories = Category.objects.all()
+    search_form = SearchForm()  # Instantiate the search form
 
-    context = {}
-    context['categories'] = categories
+    context = {
+        'categories': categories,
+        'search_form': search_form,  # Add the search form to the context
+    }
 
     return render(request, 'main/index.html', context)
 
@@ -36,6 +40,24 @@ def imageDetailPage(request, slug1, slug2):
     context['image'] = image
 
     return render(request, 'main/image.html', context)
+
+
+def search_view(request):
+    form = SearchForm(request.GET or None)
+    query = ""
+    results = []
+    if form.is_valid():
+        query = form.cleaned_data['q']
+        # Perform your search logic here and populate the results
+        # results = YourModel.objects.filter(your_field__icontains=query)
+
+    context = {
+        'form': form,
+        'query': query,
+        'results': results,
+    }
+    return render(request, 'search_results.html', context)
+
 
 
 
