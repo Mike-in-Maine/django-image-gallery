@@ -1,3 +1,4 @@
+#This is importnat dont modify it unless you know what you are doing.
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
