@@ -56,7 +56,7 @@ def search_view(request):
         'query': query,
         'results': results,
     }
-    return render(request, 'search_results.html', context)
+    return render(request, 'main/search_results.html', context)
 
 
 
